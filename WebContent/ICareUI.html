@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Index Page</title>
 
 <!-- Bootstrap Config -->
 <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
@@ -21,24 +20,28 @@
 <script type="text/javascript" src="node_modules/angular/angular.js"></script>
 <script type="text/javascript" src="node_modules/angular-route/angular-route.js"></script>
 <script type="text/javascript" src="scripts/app.js"></script>
-<script type="text/javascript" src="scripts/controllers/IndexController.js"></script>
 <script type="text/javascript" src="scripts/controllers/LoginController.js"></script>
+<script type="text/javascript" src="scripts/controllers/IndexController.js"></script>
 </head>
 <body>
 	<div class="container">
 		<br>
-		<div class="header clearfix">
+		<div class="header clearfix" align="center">
+			<h3 class="text-muted">ICareUI</h3>
+		</div>
+		<br>
+		<div ng-view></div>	
+		<br><br><br>
+		<hr>
+		<footer class="footer">
 			<nav ng-controller="NavCtrl">
 				<ul class="nav nav-pills pull-right">
-					<li ng-repeat="menu in menus" role="presentation" class="active">
-						<a ng-click="selectTab(menu)" ng-class="{'active':selectedTab==menu[0]}" href="#">{{menu}}</a>
+					<li ng-class="{'active':selectedTab==menu.title}" ng-click="selectTab(menu.title)" ng-repeat="menu in menus" role="presentation">
+						<a href="{{menu.href}}">{{menu.title}}</a>
 					</li>
 				</ul>
 			</nav>
-			<h3 class="text-muted">ICareUI</h3>
-		</div>
-		<hr>
-		<div ng-view></div>	
+		</footer>
 	</div>
 </body>
 </html>

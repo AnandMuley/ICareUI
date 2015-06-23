@@ -8,27 +8,27 @@ iCareUIApp.config(['$routeProvider',function($routeProvider){
 			templateUrl : 'views/Login.html',
 			controller : 'LoginController'
 		}).
-		otherwise('/index',{
+		when('/index',{
 			templateUrl : 'views/Index.html',
 			controller : 'IndexController'
-		});
+		}).
+		otherwise('/index');
 }]);
 
 iCareUIApp.controller('NavCtrl',['$scope','$location',function($scope,$location){
-	$scope.menus = ['Login','About'];
+	$scope.menus = [
+	    {
+	    	'title' : 'Login',
+	    	'href' : '#/login'
+	    },
+	    {
+	    	'title' : 'About',
+	    	'href' : '#/about'
+	    }
+	 ];
+	$scope.selectedTab = 'Login';
 	$scope.selectTab= function(selectedTab){
 		$scope.selectedTab = selectedTab;
-		switch(selectedTab){
-			case $scope.menus[0]:
-				$location.path('/login');
-				break;
-			case $scope.menus[1]:
-				$location.path('/about');
-				break;
-			default:
-				$location.path('/index');
-				break;
-		}
 	}
 	
 }]);

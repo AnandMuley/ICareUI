@@ -1,0 +1,11 @@
+.gradle
+.idea
+build
+gradle
+out
+/bin/
+.externalToolBuilders
+.project
+.settings
+.tern-project
+WebContent/node_modules

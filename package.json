@@ -1,0 +1,33 @@
+{
+  "name": "ICareUI",
+  "version": "1.0.0",
+  "description": "Angular UI for Product ICare",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnandMuley/ICareUI.git"
+  },
+  "keywords": [
+    "ICare"
+  ],
+  "author": "Anand Muley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnandMuley/ICareUI/issues"
+  },
+  "homepage": "https://github.com/AnandMuley/ICareUI#readme",
+  "devDependencies": {
+    "angular": "~1.3.16",
+    "angular-mocks": "~1.3.16",
+    "angular-route": "~1.3.16",
+    "bootstrap": "^3.3.4",
+    "jquery": "^2.1.4",
+    "karma": "^0.12.36",
+    "karma-jasmine": "~0.3.5",
+    "karma-phantomjs-launcher": "~0.2.0"
+  }
+}

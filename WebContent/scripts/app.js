@@ -1,21 +1,21 @@
-var iCareUIApp = angular.module('ICareUI',[
+var app = angular.module('ICareUI',[
     'ngRoute',
-    'iCareUIControllers']);
+    'ICareUIControllers',
+    'ICareUIServices']);
 
-iCareUIApp.config(['$routeProvider',function($routeProvider){
+app.config(['$routeProvider',function($routeProvider){
 	$routeProvider.
-		when('/login',{
+		when('/',{
 			templateUrl : 'views/Login.html',
 			controller : 'LoginController'
 		}).
-		when('/index',{
-			templateUrl : 'views/Index.html',
-			controller : 'IndexController'
-		}).
-		otherwise('/index');
+		when('/home',{
+			templateUrl : 'views/Home.html',
+			controller : 'HomeController'
+		});
 }]);
 
-iCareUIApp.controller('NavCtrl',['$scope','$location',function($scope,$location){
+app.controller('NavCtrl',['$scope','$location',function($scope,$location){
 	$scope.menus = [
 	    {
 	    	'title' : 'Login',
@@ -32,3 +32,6 @@ iCareUIApp.controller('NavCtrl',['$scope','$location',function($scope,$location)
 	}
 	
 }]);
+
+var controllers = angular.module('ICareUIControllers',[]);
+var services = angular.module('ICareUIServices',[]);

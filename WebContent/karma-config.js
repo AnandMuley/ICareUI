@@ -10,6 +10,7 @@ module.exports = function(config){
 		         ],
 		autoWatch : true,
 		browsers : ['PhantomJS'],
+		plugins : ['karma-jasmine','karma-phantomjs-launcher'],
 		colors : true
 	});
 }

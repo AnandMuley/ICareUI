@@ -1,4 +1,4 @@
-describe('AccessControllerTest',function(){
+describe('ACCESS CONTROLLER TEST SUITE:',function(){
 
 	var $scope,loginService,$location;
 	

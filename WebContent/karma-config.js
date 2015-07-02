@@ -6,11 +6,16 @@ module.exports = function(config){
 		         'node_modules/angular-mocks/angular-mocks.js',
 		         'node_modules/angular-route/angular-route.js',
 		         'scripts/**/*.js',
-		         'test/**/*Test.js'
+		         'test/**/*.js'
 		         ],
-		autoWatch : true,
+//		         preprocessors : {
+//		        	 'scripts/**/*.js' : ['coverage']
+//		         },
+//		         reporters : ['coverage'],
+		         reporters : ['spec'],
+		         autoWatch : true,
 		browsers : ['PhantomJS'],
-		plugins : ['karma-jasmine','karma-phantomjs-launcher'],
+		plugins : ['karma-jasmine','karma-phantomjs-launcher','karma-coverage','karma-spec-reporter'],
 		colors : true
 	});
 }

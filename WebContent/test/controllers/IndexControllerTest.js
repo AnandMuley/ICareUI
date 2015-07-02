@@ -1,4 +1,4 @@
-describe('IndexControllerTest',function(){
+describe('INDEX CONTROLLER TEST SUITE:',function(){
 	
 	var indexController,$scope;
 	

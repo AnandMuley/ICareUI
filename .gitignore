@@ -9,3 +9,4 @@ out
 .settings
 .tern-project
 WebContent/node_modules
+WebContent/coverage

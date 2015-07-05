@@ -12,6 +12,14 @@ app.config(['$routeProvider',function($routeProvider){
 		when('/home',{
 			templateUrl : 'views/Home.html',
 			controller : 'HomeController'
+		}).
+		when('/patient/create',{
+			templateUrl : 'views/CreatePatient.html',
+			controller : 'PatientController'
+		}).
+		when('/patient/search',{
+			templateUrl : 'views/SearchPatient.html',
+			controller : 'PatientController'
 		});
 }]);
 

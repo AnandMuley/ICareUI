@@ -25,6 +25,7 @@
 <script type="text/javascript" src="scripts/controllers/AccessController.js"></script>
 <script type="text/javascript" src="scripts/controllers/IndexController.js"></script>
 <script type="text/javascript" src="scripts/controllers/HomeController.js"></script>
+<script type="text/javascript" src="scripts/controllers/PatientController.js"></script>
 
 <!-- Services -->
 <script type="text/javascript" src="scripts/services/LoginService.js"></script>
@@ -38,9 +39,16 @@
         <h3 class="text-info">ICare</h3>
         <nav>
           <ul class="nav nav-justified">
-            <li><a href="#">Home</a></li>
-            <li class="active"><a href="#">Patients</a></li>
-            <li><a href="#">Appointments</a></li>
+					<li><a href="#">Home</a></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Patients <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#/patient/create">Create</a></li>
+							<li><a href="#/patient/search">Search</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Appointments</a></li>
             <li><a href="#">Downloads</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>

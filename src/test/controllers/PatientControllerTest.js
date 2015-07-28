@@ -21,7 +21,7 @@ describe('PATIENT CONTROLLER TEST SUITE:',function(){
 		// GIVEN
 		$scope.patient = patientDataProvider.validPatient;
 		
-		$httpBackend.when('POST','rest/patient/save').respond(200);
+		$httpBackend.when('POST','http://localhost:8080/ICareRest/rest/patient/create').respond(200);
 		
 		// WHEN
 		$scope.create($scope);

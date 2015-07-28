@@ -15,7 +15,7 @@ describe('PATIENT SERVICE TEST SUITE:',function(){
 		$scope.message = '';
 		$scope.patient = dataProvider.validPatient;
 		
-		$httpBackend.when('POST','rest/patient/save').respond(200);
+		$httpBackend.when('POST','http://localhost:8080/ICareRest/rest/patient/create').respond(200);
 		
 		// WHEN
 		patientService.save($scope);
@@ -31,7 +31,7 @@ describe('PATIENT SERVICE TEST SUITE:',function(){
 		$scope.message = '';
 		$scope.patient = dataProvider.validPatient;
 		
-		$httpBackend.when('POST','rest/patient/save').respond(500);
+		$httpBackend.when('POST','http://localhost:8080/ICareRest/rest/patient/create').respond(500);
 		
 		// WHEN
 		patientService.save($scope);

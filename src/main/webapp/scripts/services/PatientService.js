@@ -18,13 +18,13 @@ app.service('PatientService',['$http',function($http){
 	this.save = function($scope){
 		$http({
 			method : 'POST',
-			url :'rest/patient/save',
+			url :'http://localhost:8080/ICareRest/rest/patient/create',
 			headers : {
 				'Content-Type':'application/json'
 			},
 			data : getPatient($scope)
 		}).success(function(){
-			$scope.message = 'Patient saved successfully';
+			$scope.message = 'Patient created successfully';
 			$scope.isSuccess = true;
 		}).error(function(){
 			$scope.message = 'Some error occured';

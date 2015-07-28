@@ -11,7 +11,7 @@ app.service('PatientDataProvider',function(){
 			zipCode : 444001
 	};
 	this.messages = {
-			PATIENT_SAVE_SUCCESS : 'Patient saved successfully',
+			PATIENT_SAVE_SUCCESS : 'Patient created successfully',
 			GENERIC_ERROR : 'Some error occured'
 	}
 });

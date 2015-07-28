@@ -8,5 +8,6 @@ out
 .project
 .settings
 .tern-project
-WebContent/node_modules
-WebContent/coverage
+src/main/webapp/node_modules
+src/main/webapp/coverage
+src/test/node_modules

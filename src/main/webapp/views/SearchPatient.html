@@ -8,3 +8,30 @@
 		<button ng-click="search()" class="btn btn-lg btn-primary btn-block">Search</button>
 	</div>
 </div>
+<br/>
+<div ng-if="patientsFound" class="row">
+	<div class="col-md-12 panel panel-default">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Sr.No</th>
+					<th>Name</th>
+					<th>Contact</th>
+					<th>City</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="patient in patientsFound">
+					<td scope="row">{{$index+1}}</td>
+					<td>{{patient.firstName}} {{patient.lastName}}</td>
+					<td>{{patient.mobileNo}}</td>
+					<td>{{patient.city}}</td>
+					<td>
+						<a href="#" ng-click="editPatient(patient)">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

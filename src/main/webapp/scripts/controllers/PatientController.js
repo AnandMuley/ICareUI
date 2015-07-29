@@ -1,4 +1,4 @@
-controllers.controller('PatientController',['$scope','PatientService',function($scope,patientService){
+controllers.controller('PatientController',['$scope','$location','PatientService',function($scope,$location,patientService){
 	$scope.pageTitle = 'Create Patient';
 	
 	$scope.create = function(){
@@ -7,6 +7,10 @@ controllers.controller('PatientController',['$scope','PatientService',function($
 	
 	$scope.search = function(){
 		patientService.searchByName($scope);
+	}
+	
+	$scope.editPatient = function(patientToEdit){
+		$location.path()
 	}
 	
 }]);

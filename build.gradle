@@ -8,6 +8,8 @@ sourceCompatibility = 1.7
 version = '1.0'
 def SpringVersion = '4.0.0.RELEASE'
 
+httpPort = 7998
+
 ext{
 }
 

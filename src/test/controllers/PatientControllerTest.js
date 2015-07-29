@@ -1,6 +1,12 @@
 describe('PATIENT CONTROLLER TEST SUITE:',function(){
 	
+	var context = 'http://localhost:8090/ICareRest/rest/';
 	var $scope,$httpBackend;
+	
+	var REST_URLS = {
+			PATIENT_CREATE : context+'patient/create',
+			PATIENT_FIND_BY_NAME : context+'patient/findbyname?name='
+	}
 	
 	beforeEach(module('ICareUI'));
 	
@@ -21,10 +27,10 @@ describe('PATIENT CONTROLLER TEST SUITE:',function(){
 		// GIVEN
 		$scope.patient = patientDataProvider.validPatient;
 		
-		$httpBackend.when('POST','http://localhost:8080/ICareRest/rest/patient/create').respond(200);
+		$httpBackend.when('POST',REST_URLS.PATIENT_CREATE).respond(200);
 		
 		// WHEN
-		$scope.create($scope);
+		$scope.create();
 		$httpBackend.flush();
 		
 		// THEN
@@ -32,7 +38,18 @@ describe('PATIENT CONTROLLER TEST SUITE:',function(){
 	});
 	
 	it('Should search a patient by name',function(){
+		// GIVEN
+		$scope.searchTxt = 'Aron';
+		var patients = patientDataProvider.validPatientsFound; 
 		
+		$httpBackend.when('GET',REST_URLS.PATIENT_FIND_BY_NAME+$scope.searchTxt).respond(200,patients);
+		
+		// WHEN
+		$scope.search();
+		$httpBackend.flush();
+		
+		// THEN
+		expect($scope.patientsFound.length).toBe(2);
 	});
 	
 });

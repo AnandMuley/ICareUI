@@ -1,5 +1,6 @@
 app.service('PatientService',['$http',function($http){
 
+	var context = 'http://localhost:8090/ICareRest/rest/';
 	getPatient = function($scope){
 		var patient = {
 				firstName : $scope.firstName,
@@ -18,7 +19,7 @@ app.service('PatientService',['$http',function($http){
 	this.save = function($scope){
 		$http({
 			method : 'POST',
-			url :'http://localhost:8080/ICareRest/rest/patient/create',
+			url :context+'patient/create',
 			headers : {
 				'Content-Type':'application/json'
 			},
@@ -31,6 +32,21 @@ app.service('PatientService',['$http',function($http){
 			$scope.isSuccess = false;
 		});
 		
+	}
+	
+	this.searchByName = function($scope){
+		$http({
+			method:'GET',
+			url:context+'patient/findbyname?name='+$scope.searchTxt,
+			headers : {
+				'Content-type':'application/json'
+			}
+		}).success(function(data){
+			$scope.patientsFound = data;
+		}).error(function(){
+			$scope.message = 'Some error occured';
+			$scope.isSuccess = false;
+		});
 	}
 	
 	

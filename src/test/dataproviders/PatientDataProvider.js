@@ -14,4 +14,29 @@ app.service('PatientDataProvider',function(){
 			PATIENT_SAVE_SUCCESS : 'Patient created successfully',
 			GENERIC_ERROR : 'Some error occured'
 	}
+	this.validPatientsFound = [ {
+		'id' : 'PID101',
+		'firstName' : 'Aron',
+		'middleName' : 'John',
+		'lastName' : 'Johnson',
+		'mobileNo' : 9860098500,
+		'emailId' : 'aron@gmail.com',
+		'addrLine1' : '201,Sky Heights',
+		'addrLine2' : 'EB Road',
+		'city' : 'Mumbai',
+		'state' : 'Maharashtra',
+		'zipCode' : '444001'
+	}, {
+		'id' : 'PID102',
+		'firstName' : 'Albert',
+		'middleName' : 'Thomas',
+		'lastName' : 'Aron',
+		'mobileNo' : 9860098501,
+		'emailId' : 'albert@gmail.com',
+		'addrLine1' : '202,Sky Heights',
+		'addrLine2' : 'EB Road',
+		'city' : 'Mumbai',
+		'state' : 'Maharashtra',
+		'zipCode' : '444001'
+	} ]
 });

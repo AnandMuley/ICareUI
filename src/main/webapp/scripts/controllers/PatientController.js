@@ -6,7 +6,7 @@ controllers.controller('PatientController',['$scope','PatientService',function($
 	}
 	
 	$scope.search = function(){
-		
+		patientService.searchByName($scope);
 	}
 	
 }]);

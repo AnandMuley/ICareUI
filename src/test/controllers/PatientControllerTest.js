@@ -1,7 +1,7 @@
 describe('PATIENT CONTROLLER TEST SUITE:',function(){
 	
 	var context = 'http://localhost:8090/ICareRest/rest/';
-	var $scope,$httpBackend;
+	var $scope,$httpBackend,$location;
 	
 	var REST_URLS = {
 			PATIENT_CREATE : context+'patient/create',
@@ -14,10 +14,12 @@ describe('PATIENT CONTROLLER TEST SUITE:',function(){
 		$scope = {};
 		patientDataProvider = PatientDataProvider;
 		$httpBackend = $injector.get('$httpBackend');
+		$location = $injector.get('$location');
 		createController = function(){
 			return $controller('PatientController',{
 				'$scope' : $scope,
-				'PatientService' : PatientService
+				'PatientService' : PatientService,
+				'$location' : $location
 			})
 		}
 		createController();
@@ -60,9 +62,11 @@ describe('PATIENT CONTROLLER TEST SUITE:',function(){
 		$scope.editPatient(patientToEdit);
 		
 		// THEN
-		expect($scope.id).toBe(patientToEdit.id);
-		expect($scope.editingPatient).toBe(true);
-		expect($scope.pageTitle).toBe('Edit Patient');
-		
+		var patient = $location.search().PTE;
+		expect(patient.id).toBe(patientToEdit.id);
+		expect(patient.editingPatient).toBe(true);
+		expect(patient.pageTitle).toBe('Edit Patient');
+		expect($location.path()).toBe('/patient/create');
 	});
+	
 });

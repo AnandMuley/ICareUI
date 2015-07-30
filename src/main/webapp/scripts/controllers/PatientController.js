@@ -2,6 +2,13 @@ controllers.controller('PatientController',['$scope','$location','PatientService
 	$scope.pageTitle = 'Create Patient';
 	$scope.editingPatient = false;
 	
+	if($location.search().PTE!=undefined){
+		var patient = $location.search().PTE;
+		$scope.pageTitle = patient.pageTitle;
+		$scope.editingPatient = patient.editingPatient;
+		patientService.populateReqModelsForEditing(patient,$scope);
+	}
+
 	$scope.create = function(){
 		patientService.save($scope);
 	}
@@ -10,11 +17,15 @@ controllers.controller('PatientController',['$scope','$location','PatientService
 		patientService.searchByName($scope);
 	}
 	
+	$scope.update = function(){
+		patientService.update($scope);
+	}
+	
 	$scope.editPatient = function(patientToEdit){
-		$location.path('/patient/edit');
-		patientService.populateReqModelsForEditing(patientToEdit,$scope);
-		$scope.editingPatient = true;
-		$scope.pageTitle = 'Edit Patient';
+		patientToEdit.editingPatient = true;
+		patientToEdit.pageTitle = 'Edit Patient';
+		$location.search('PTE',patientToEdit);
+		$location.path('/patient/create');
 	}
 	
 }]);

@@ -52,8 +52,11 @@
 			<br/>
 			<div class="row">
 				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<button ng-click="create()" class="btn btn-lg btn-primary btn-block" type="button">Create</button>
+				<div ng-show="!editingPatient" class="col-md-8">
+					<button ng-click="create()" class="btn btn-lg btn-primary btn-block" type="button">CREATE</button>
+				</div>
+				<div ng-show="editingPatient" class="col-md-8">
+					<button ng-click="update()" class="btn btn-lg btn-primary btn-block" type="button">UPDATE</button>
 				</div>
 			</div>
 			<br/>

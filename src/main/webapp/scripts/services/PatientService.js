@@ -16,6 +16,25 @@ app.service('PatientService',['$http',function($http){
 		return patient;
 	}
 	
+	this.update = function($scope){
+		var patient = getPatient($scope);
+		patient.id = $scope.id;
+		$http({
+			method : 'PUT',
+			url : context+'patient/update',
+			headers : {
+				'Content-type':'application/json'
+			},
+			data : patient
+		}).success(function(){
+			$scope.message = 'Patient updated successfully';
+			$scope.isSuccess = true;
+		}).error(function(){
+			$scope.message = 'Some error occured';
+			$scope.isSuccess = false;
+		});
+	}
+	
 	this.save = function($scope){
 		$http({
 			method : 'POST',

@@ -10,6 +10,18 @@ app.service('PatientDataProvider',function(){
 			state : 'Maharashtra',
 			zipCode : 444001
 	};
+	this.patientToEdit = {
+			id : '55b753cde4b0a9dc1e702aa8',
+			firstName : 'Arun',
+			lastName : 'Prajapati',
+			mobileNo : 9820098300,
+			emailId : 'arun@gmail.com',
+			addrLine1 : 'Address Line 1',
+			addrLine2 : '',
+			city : 'Pune',
+			state : 'Maharashtra',
+			zipCode : 444001
+	};
 	this.messages = {
 			PATIENT_SAVE_SUCCESS : 'Patient created successfully',
 			GENERIC_ERROR : 'Some error occured'

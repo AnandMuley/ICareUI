@@ -52,4 +52,17 @@ describe('PATIENT CONTROLLER TEST SUITE:',function(){
 		expect($scope.patientsFound.length).toBe(2);
 	});
 	
+	it('Should redirect to add patient page with populated patient details',function(){
+		// GIVEN
+		var patientToEdit = patientDataProvider.patientToEdit;
+		
+		// WHEN
+		$scope.editPatient(patientToEdit);
+		
+		// THEN
+		expect($scope.id).toBe(patientToEdit.id);
+		expect($scope.editingPatient).toBe(true);
+		expect($scope.pageTitle).toBe('Edit Patient');
+		
+	});
 });

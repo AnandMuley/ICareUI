@@ -65,4 +65,27 @@ describe('PATIENT SERVICE TEST SUITE:',function(){
 		expect($scope.patientsFound.length).toBe(2);
 	});
 	
+	it('Should populate patient model for editing',function(){
+		// GIVEN
+		var patientToEdit = patientDataProvider.patientToEdit;
+		
+		// WHEN
+		patientService.populateReqModelsForEditing(patientToEdit,$scope);
+		
+		// THEN
+		expect($scope.id).toBe(patientToEdit.id);
+		
+		expect($scope.firstName).toBe(patientToEdit.firstName);
+		expect($scope.lastName).toBe(patientToEdit.lastName);
+		
+		expect($scope.mobileNo).toBe(patientToEdit.mobileNo);
+		expect($scope.emailId).toBe(patientToEdit.emailId);
+		
+		expect($scope.addrLine1).toBe(patientToEdit.addrLine1);
+		expect($scope.addrLine2).toBe(patientToEdit.addrLine2);
+		expect($scope.city).toBe(patientToEdit.city);
+		expect($scope.state).toBe(patientToEdit.state);
+		expect($scope.zipCode).toBe(patientToEdit.zipCode);
+	});
+	
 });

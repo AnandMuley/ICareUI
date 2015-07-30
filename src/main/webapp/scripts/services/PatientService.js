@@ -49,5 +49,21 @@ app.service('PatientService',['$http',function($http){
 		});
 	}
 	
+	this.populateReqModelsForEditing = function(patientToEdit,scope){
+		scope.id = patientToEdit.id;
+			
+		scope.firstName = patientToEdit.firstName;
+		scope.lastName = patientToEdit.lastName;
+		
+		scope.mobileNo = patientToEdit.mobileNo;
+		scope.emailId = patientToEdit.emailId;
+		
+		scope.addrLine1 = patientToEdit.addrLine1;
+		scope.addrLine2 = patientToEdit.addrLine2;
+		scope.city = patientToEdit.city;
+		scope.state = patientToEdit.state;
+		scope.zipCode = patientToEdit.zipCode;
+	}
+	
 	
 }]);

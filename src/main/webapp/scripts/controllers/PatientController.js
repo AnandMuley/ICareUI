@@ -1,5 +1,6 @@
 controllers.controller('PatientController',['$scope','$location','PatientService',function($scope,$location,patientService){
 	$scope.pageTitle = 'Create Patient';
+	$scope.editingPatient = false;
 	
 	$scope.create = function(){
 		patientService.save($scope);
@@ -10,7 +11,10 @@ controllers.controller('PatientController',['$scope','$location','PatientService
 	}
 	
 	$scope.editPatient = function(patientToEdit){
-		$location.path()
+		$location.path('/patient/edit');
+		patientService.populateReqModelsForEditing(patientToEdit,$scope);
+		$scope.editingPatient = true;
+		$scope.pageTitle = 'Edit Patient';
 	}
 	
 }]);

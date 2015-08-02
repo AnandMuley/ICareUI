@@ -1,0 +1,35 @@
+<title>{{pageTitle}}</title>
+<h3 class="text-info text-center">{{pageTitle}}</h3>
+<div class="row">
+	<div class="col-md-4">
+		<div class="row">
+			<div class="col-md-10">
+				<input class="form-control input-md" ng-model="medSrchTxt" ng-change="searchMedicine()" placeholder="Search Medicine"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-md-6" ng-repeat="medicine in medicines">
+				<div class="input-group">
+					<input ng-click="prescribe(medicine)" type="checkbox" aria-label="..." />&nbsp;{{medicine.name}}
+				</div>
+			</div>
+		</div>
+		<br/>
+		<div ng-show="prescriptions.length>0" class="row">
+			<div align="center">
+				<h4>Prescriptions</h4>
+			</div>
+			<div class="row pres-row" ng-repeat="pres in prescriptions">
+				<div class="col-md-1">{{$index+1}}</div>
+				<div class="col-md-4">{{pres.name}}</div>
+				<div class="col-md-3">
+					<input class="form-control input-sm" placeholder="Qty" />
+				</div>
+				<div class="col-md-3">
+					<input class="form-control input-sm" placeholder="Freq" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -20,6 +20,9 @@ app.config(['$routeProvider',function($routeProvider){
 		when('/patient/search',{
 			templateUrl : 'views/SearchPatient.html',
 			controller : 'PatientController'
+		}).when('/visit/create',{
+			templateUrl:'views/CreateVisit.html',
+			controller : 'VisitController'
 		});
 }]);
 

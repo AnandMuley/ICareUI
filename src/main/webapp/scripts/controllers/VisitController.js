@@ -1,4 +1,4 @@
-controllers.controller('VisitController',['$scope','MedicineService',function($scope,medicineService){
+controllers.controller('VisitController',['$scope','MedicineService','VisitService',function($scope,medicineService,visitService){
 	$scope.pageTitle = 'Create Visit';
 	$scope.prescriptions = [];
 	
@@ -7,8 +7,13 @@ controllers.controller('VisitController',['$scope','MedicineService',function($s
 	}
 	
 	$scope.prescribe = function(medicine){
-		$scope.prescriptions.push(medicine);
-		console.log('Prescribing...:'+medicine.name);
+		console.log('PRES : '+medicine);
+		if(medicine.checked){
+			visitService.prescribeMedicine(medicine,$scope);
+		}else{
+			visitService.unprescribeMedicine(medicine,$scope);
+		}
+		
 	}
 	
 }]);

@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-6" ng-repeat="medicine in medicines">
 				<div class="input-group">
-					<input ng-click="prescribe(medicine)" type="checkbox" aria-label="..." />&nbsp;{{medicine.name}}
+					<input ng-model="medicine.checked" ng-click="prescribe(medicine)" type="checkbox" aria-label="..." />&nbsp;{{medicine.name}}
 				</div>
 			</div>
 		</div>

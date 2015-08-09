@@ -7,13 +7,11 @@ controllers.controller('VisitController',['$scope','MedicineService','VisitServi
 	}
 	
 	$scope.prescribe = function(medicine){
-		console.log('PRES : '+medicine);
 		if(medicine.checked){
 			visitService.prescribeMedicine(medicine,$scope);
 		}else{
 			visitService.unprescribeMedicine(medicine,$scope);
 		}
-		
 	}
 	
 }]);

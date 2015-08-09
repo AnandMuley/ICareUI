@@ -11,3 +11,4 @@ out
 src/main/webapp/node_modules
 src/main/webapp/coverage
 src/test/node_modules
+.classpath

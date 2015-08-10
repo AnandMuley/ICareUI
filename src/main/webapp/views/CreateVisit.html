@@ -1,6 +1,7 @@
 <title>{{pageTitle}}</title>
 <h3 class="text-info text-center">{{pageTitle}}</h3>
 <div class="row">
+	<div class="col-md-2"></div>
 	<div class="col-md-4">
 		<div class="row">
 			<div class="col-md-10">
@@ -15,21 +16,39 @@
 				</div>
 			</div>
 		</div>
-		<br/>
-		<div ng-show="prescriptions.length>0" class="row">
-			<div align="center">
-				<h4>Prescriptions</h4>
-			</div>
-			<div class="row pres-row" ng-repeat="pres in prescriptions">
+	</div>
+	<div class="col-md-5">
+		<div align="center" ng-show="prescriptions.length>0" class="row">
+			<h4>Prescriptions</h4>
+		</div>
+		<div class="row pres-row" ng-repeat="pres in prescriptions">
+			<div class="col-md-11" class="row" >
 				<div class="col-md-1">{{$index+1}}</div>
 				<div class="col-md-4">{{pres.name}}</div>
 				<div class="col-md-3">
-					<input class="form-control input-sm" placeholder="Qty" />
+					<input ng-model="pres.qty" class="form-control input-sm" placeholder="Qty" />
 				</div>
 				<div class="col-md-3">
-					<input class="form-control input-sm" placeholder="Freq" />
+					<input ng-model="pres.freq" class="form-control input-sm" placeholder="Freq" />
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+		<textarea ng-model="problems" rows="3" class="form-control" placeholder="Problems"></textarea>
+	</div>
+	<div class="col-md-4">
+		<textarea ng-model="allergies" rows="3" class="form-control" placeholder="Allergies"></textarea>
+	</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<button type="button" ng-click="createVisit()" class="btn btn-lg btn-success btn-block">Create</button>
 	</div>
 </div>

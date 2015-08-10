@@ -14,4 +14,8 @@ controllers.controller('VisitController',['$scope','MedicineService','VisitServi
 		}
 	}
 	
+	$scope.createVisit = function(){
+		visitService.createVisit();
+	}
+	
 }]);

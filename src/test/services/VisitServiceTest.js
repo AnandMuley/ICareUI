@@ -1,12 +1,14 @@
 describe('VISIT SERVICE TEST SUITE :',function(){
 	
-	var visitService,medicineDataProvider;
+	var visitService,medicineDataProvider,httpBackend;
+	var context = 'http://localhost:8090/ICareRest/rest/';
 	
 	beforeEach(module('ICareUI'));
 	
 	beforeEach(inject(function($injector,VisitService,MedicineDataProvider){
 		visitService = VisitService;
 		scope = {};
+		httpBackend = $injector.get('$httpBackend');
 		scope.prescriptions = [];
 		medicineDataProvider = MedicineDataProvider;
 	}));
@@ -51,6 +53,49 @@ describe('VISIT SERVICE TEST SUITE :',function(){
 		expect(scope.prescriptions.length).toBe(1);
 		expect(scope.prescriptions[0].id).toBe('MID102');
 		expect(scope.prescriptions[0].name).toBe('Crocold');
+	});
+	
+	it('Should check medicine if already prescribed before removing',function(){
+		// GIVEN
+		var medicine = medicineDataProvider.findMedicinesByName[0];
+		
+		// WHEN
+		visitService.unprescribeMedicine(medicine,scope);
+		
+		// THEN
+		expect(scope.prescriptions.length).toBe(0);
+	});
+	
+	it('Should create visit',function(){
+		// GIVEN
+		scope.prescriptions = medicineDataProvider.prescriptions;
+		scope.problems = 'Cough and Cold';
+		scope.allergies = 'Peanuts';
+		
+		httpBackend.when('POST',context+'visit/create').respond(200);
+		
+		// WHEN
+		visitService.createVisit(scope);
+		httpBackend.flush();
+		
+		// THEN
+		expect(scope.message).toBe('Visit created successfully!');
+	});
+	
+	it('Should show an error message if visit is not saved',function(){
+		// GIVEN
+		scope.prescriptions = medicineDataProvider.prescriptions;
+		scope.problems = 'Cough and Cold';
+		scope.allergies = 'Peanuts';
+		
+		httpBackend.when('POST',context+'visit/create').respond(500);
+		
+		// WHEN
+		visitService.createVisit(scope);
+		httpBackend.flush();
+		
+		// THEN
+		expect(scope.message).toBe('Some error occurred !');
 	});
 	
 });

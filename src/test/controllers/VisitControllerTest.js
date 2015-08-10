@@ -79,6 +79,10 @@ describe('VISIT CONTROLLER TEST SUITE : ',function(){
 	it('Should remove medicine from prescriptions',function(){
 		// GIVEN
 		var medicine = dataProvider.findMedicinesByName[0];
+		medicine.checked = true;
+		$scope.prescribe(medicine);
+		expect($scope.prescriptions.length).toBe(1);
+		
 		medicine.checked = false;
 		
 		// WHEN

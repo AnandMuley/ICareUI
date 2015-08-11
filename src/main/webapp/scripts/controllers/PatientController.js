@@ -28,4 +28,9 @@ controllers.controller('PatientController',['$scope','$location','PatientService
 		$location.path('/patient/create');
 	}
 	
+	$scope.createVisit = function(patient){
+		$location.search('PID',patient.id);
+		$location.path('/visit/create');
+	}
+	
 }]);

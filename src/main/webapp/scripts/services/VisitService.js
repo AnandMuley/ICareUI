@@ -22,6 +22,7 @@ app.service('VisitService',['$http',function($http){
 	
 	this.populateVisitData = function(scope){
 		var visitData = {
+				pid : scope.pid,
 				prescriptions : scope.prescriptions,
 				problems : scope.problems,
 				allergies : scope.allergies

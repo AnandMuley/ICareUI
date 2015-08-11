@@ -2,12 +2,14 @@
 <h3 class="text-info text-center">{{pageTitle}}</h3>
 <div class="row">
 	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<input class="form-control input-md" ng-model="medSrchTxt"
+			ng-change="searchMedicine()" placeholder="Search Medicine" />
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2"></div>
 	<div class="col-md-4">
-		<div class="row">
-			<div class="col-md-10">
-				<input class="form-control input-md" ng-model="medSrchTxt" ng-change="searchMedicine()" placeholder="Search Medicine"/>
-			</div>
-		</div>
 		<br/>
 		<div class="row">
 			<div class="col-md-6" ng-repeat="medicine in medicines">

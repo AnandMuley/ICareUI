@@ -1,6 +1,14 @@
-controllers.controller('VisitController',['$scope','MedicineService','VisitService',function($scope,medicineService,visitService){
+controllers.controller('VisitController',
+		['$scope','MedicineService','VisitService','$location',
+		 function($scope,medicineService,visitService,$location){
 	$scope.pageTitle = 'Create Visit';
 	$scope.prescriptions = [];
+	
+	if($location.search().PID == undefined){
+		$location.path('/home');
+	}else{
+		$scope.pid = $location.search().PID;
+	}
 	
 	$scope.searchMedicine = function(){
 		medicineService.findByName($scope.medSrchTxt,$scope);
@@ -15,7 +23,7 @@ controllers.controller('VisitController',['$scope','MedicineService','VisitServi
 	}
 	
 	$scope.createVisit = function(){
-		visitService.createVisit();
+		visitService.createVisit($scope);
 	}
 	
 }]);

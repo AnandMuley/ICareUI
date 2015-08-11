@@ -69,4 +69,17 @@ describe('PATIENT CONTROLLER TEST SUITE:',function(){
 		expect($location.path()).toBe('/patient/create');
 	});
 	
+	it('Should redirect to createVisit page',function(){
+		// GIVEN
+		var patient = patientDataProvider.validPatient;
+		
+		// WHEN
+		$scope.createVisit(patient);
+		
+		// THEN
+		var pid = $location.search().PID;
+		expect(patient.id).toBe(pid);
+		expect($location.path()).toBe('/visit/create');
+	});
+	
 });

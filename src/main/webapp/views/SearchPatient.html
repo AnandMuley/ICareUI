@@ -15,7 +15,9 @@
 					<th>Name</th>
 					<th>Contact</th>
 					<th>City</th>
-					<th>Actions</th>
+					<th>
+						<div align="center">Actions</div>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,7 +27,10 @@
 					<td>{{patient.mobileNo}}</td>
 					<td>{{patient.city}}</td>
 					<td>
-						<button class="btn-link" ng-click="editPatient(patient)">Edit</button>
+						<div align="center">
+							<button class="btn-link" ng-click="editPatient(patient)">Edit</button>
+							<button class="btn-link" ng-click="createVisit(patient)">Visit</button>
+						</div>
 					</td>
 				</tr>
 			</tbody>

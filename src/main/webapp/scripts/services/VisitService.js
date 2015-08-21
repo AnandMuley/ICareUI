@@ -20,12 +20,28 @@ app.service('VisitService',['$http',function($http){
 		}
 	}
 	
+	this.toStringArr = function(prescriptions){
+		var prescribed = [];
+		$.each(prescriptions,function(index,val){
+			prescribed.push(val.name);
+		});
+		return prescribed;
+	}
+	
+	
+	
 	this.populateVisitData = function(scope){
+		var symptoms = [];
+		symptoms.push(scope.problems);
+		
+		var allergies = [];
+		allergies.push(scope.allergies);
+		
 		var visitData = {
-				pid : scope.pid,
-				prescriptions : scope.prescriptions,
-				problems : scope.problems,
-				allergies : scope.allergies
+				patientId : scope.pid,
+				prescriptions : self.toStringArr(scope.prescriptions),
+				symptoms : symptoms,
+				allergies : allergies
 		}
 		return visitData;
 	}

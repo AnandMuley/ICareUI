@@ -8,6 +8,7 @@ controllers.controller('VisitController',
 		$location.path('/home');
 	}else{
 		$scope.pid = $location.search().PID;
+		visitService.fetchVisits($scope);
 	}
 	
 	$scope.searchMedicine = function(){

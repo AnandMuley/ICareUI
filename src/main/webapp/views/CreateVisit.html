@@ -1,56 +1,113 @@
 <title>{{pageTitle}}</title>
-<h3 class="text-info text-center">{{pageTitle}}</h3>
 <div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8">
-		<input class="form-control input-md" ng-model="medSrchTxt"
-			ng-change="searchMedicine()" placeholder="Search Medicine" />
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-4">
-		<br/>
+	<div class="col-md-6">
 		<div class="row">
-			<div class="col-md-6" ng-repeat="medicine in medicines">
-				<div class="input-group">
-					<input ng-model="medicine.checked" ng-click="prescribe(medicine)" type="checkbox" aria-label="..." />&nbsp;{{medicine.name}}
+			<h3 class="text-info text-center">{{pageTitle}}</h3>
+		</div>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<input class="form-control input-md" ng-model="medSrchTxt"
+					ng-change="searchMedicine()" placeholder="Search Medicine" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-11">
+				<br />
+				<div class="row">
+					<div class="col-md-6" ng-repeat="medicine in medicines">
+						<div class="input-group">
+							<input ng-model="medicine.checked" ng-click="prescribe(medicine)"
+								type="checkbox" aria-label="..." />&nbsp;{{medicine.name}}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-md-5">
-		<div align="center" ng-show="prescriptions.length>0" class="row">
-			<h4>Prescriptions</h4>
-		</div>
-		<div class="row pres-row" ng-repeat="pres in prescriptions">
-			<div class="col-md-11" class="row" >
-				<div class="col-md-1">{{$index+1}}</div>
-				<div class="col-md-4">{{pres.name}}</div>
-				<div class="col-md-3">
-					<input ng-model="pres.qty" class="form-control input-sm" placeholder="Qty" />
+		<div class="row">
+			<div class="col-md-1"></div>	
+			<div class="col-md-11">
+				<div align="center" ng-show="prescriptions.length>0" class="row">
+					<h4>Prescriptions</h4>
 				</div>
-				<div class="col-md-3">
-					<input ng-model="pres.freq" class="form-control input-sm" placeholder="Freq" />
+				<div class="row pres-row" ng-repeat="pres in prescriptions">
+					<div class="col-md-11" class="row">
+						<div class="col-md-1">{{$index+1}}</div>
+						<div class="col-md-4">{{pres.name}}</div>
+						<div class="col-md-3">
+							<input ng-model="pres.qty" class="form-control input-sm"
+								placeholder="Qty" />
+						</div>
+						<div class="col-md-3">
+							<input ng-model="pres.freq" class="form-control input-sm"
+								placeholder="Freq" />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<textarea ng-model="problems" rows="3" class="form-control"
+					placeholder="Problems"></textarea>
+			</div>
+			<div class="col-md-5">
+				<textarea ng-model="allergies" rows="3" class="form-control"
+					placeholder="Allergies"></textarea>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<button type="button" ng-click="createVisit()"
+					class="btn btn-lg btn-success btn-block">Create</button>
+			</div>
+		</div>
+		<br />
+		<div ng-show="message!=null" class="row">
+			<div class="col-md-12">
+				<div align="center" class="alert"
+					ng-class="{'alert-success':isSuccess,'alert-danger':!isSuccess}"
+					role="alert">{{message}}</div>
+			</div>
+		</div>
 	</div>
-</div>
-<br/>
-<div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-4">
-		<textarea ng-model="problems" rows="3" class="form-control" placeholder="Problems"></textarea>
-	</div>
-	<div class="col-md-4">
-		<textarea ng-model="allergies" rows="3" class="form-control" placeholder="Allergies"></textarea>
-	</div>
-</div>
-<br/>
-<div class="row">
-	<div class="col-md-4"></div>
-	<div class="col-md-4">
-		<button type="button" ng-click="createVisit()" class="btn btn-lg btn-success btn-block">Create</button>
+	<div class="col-md-6">
+		<div class="row">
+			<h3 class="text-info text-center">Earlier Visits</h3>
+		</div>
+		<div ng-if="visits.length>0" class="row">
+			<div class="col-md-12 panel panel-default">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Sr.No</th>
+							<th>Date</th>
+							<th>Allergies</th>
+							<th>Symptoms</th>
+							<th>Prescriptions</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat="visit in visits">
+						<tr>
+							<td scope="row">{{$index+1}}</td>
+							<td>{{visit.date}}</td>
+							<td>{{visit.allergies}}</td>
+							<td>{{visit.symptoms}}</td>
+							<td>{{visit.prescriptions}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div ng-if="visits.length==0" class="row">
+			<div class="col-md-12">
+				<div align="center">Patient is visiting for the first time.</div>
+			</div>
+		</div>
 	</div>
 </div>

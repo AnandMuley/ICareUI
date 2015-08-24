@@ -46,6 +46,20 @@ app.service('VisitService',['$http',function($http){
 		return visitData;
 	}
 	
+	this.fetchVisits = function(scope){
+		$http({
+			url:context+'visit/findall?pid='+scope.pid,
+			method : 'GET',
+			headers : {
+				'Content-type' : 'application/json'
+			}
+		}).success(function(data,status){
+			scope.visits = data;
+		}).error(function(data,status){
+			scope.message = 'Some error occured !';
+		});
+	}
+	
 	this.createVisit = function(scope){
 		$http({
 			method : 'POST',
@@ -55,6 +69,7 @@ app.service('VisitService',['$http',function($http){
 			},
 			data : self.populateVisitData(scope)
 		}).success(function(data,status){
+			scope.isSuccess = true;
 			scope.message = 'Visit created successfully!';
 		}).error(function(data,status){
 			scope.message = 'Some error occurred !';

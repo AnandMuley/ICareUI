@@ -1,5 +1,8 @@
 app.service('PatientService',['$http',function($http){
 
+	this.patient = {};
+	var self = this;
+	
 	var context = 'http://localhost:8090/ICareRest/rest/';
 	getPatient = function($scope){
 		var patient = {
@@ -84,5 +87,31 @@ app.service('PatientService',['$http',function($http){
 		scope.zipCode = patientToEdit.zipCode;
 	}
 	
+	this.setCurrentPatient = function(patient){
+		self.patient = patient;
+	}
+	
+	this.getPatient = function(){
+		return self.patient;
+	}
+	
+	this.resetPatient = function(){
+		self.patient = {};
+	}
+	
+	this.resetModelsForEditing = function(scope){
+		scope.id = null;
+		scope.firstName = null;
+		scope.lastName = null;
+		
+		scope.mobileNo = null;
+		scope.emailId = null;
+		
+		scope.addrLine1 = null;
+		scope.addrLine2 = null;
+		scope.city = null;
+		scope.state = null;
+		scope.zipCode = null;
+	}
 	
 }]);

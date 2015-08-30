@@ -17,6 +17,10 @@ app.config(['$routeProvider',function($routeProvider){
 			templateUrl : 'views/CreatePatient.html',
 			controller : 'PatientController'
 		}).
+		when('/patient/edit',{
+			templateUrl : 'views/CreatePatient.html',
+			controller : 'PatientController'
+		}).
 		when('/patient/search',{
 			templateUrl : 'views/SearchPatient.html',
 			controller : 'PatientController'

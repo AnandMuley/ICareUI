@@ -30,7 +30,7 @@ app.service('VisitService',['$http',function($http){
 	
 	
 	
-	this.populateVisitData = function(scope){
+	this.populateVisitData = function(scope,patientId){
 		var symptoms = [];
 		symptoms.push(scope.problems);
 		
@@ -38,7 +38,7 @@ app.service('VisitService',['$http',function($http){
 		allergies.push(scope.allergies);
 		
 		var visitData = {
-				patientId : scope.pid,
+				patientId : patientId,
 				prescriptions : self.toStringArr(scope.prescriptions),
 				symptoms : symptoms,
 				allergies : allergies
@@ -46,9 +46,9 @@ app.service('VisitService',['$http',function($http){
 		return visitData;
 	}
 	
-	this.fetchVisits = function(scope){
+	this.fetchVisits = function(scope,patientId){
 		$http({
-			url:context+'visit/findall?pid='+scope.pid,
+			url:context+'visit/findall?pid='+patientId,
 			method : 'GET',
 			headers : {
 				'Content-type' : 'application/json'
@@ -60,17 +60,18 @@ app.service('VisitService',['$http',function($http){
 		});
 	}
 	
-	this.createVisit = function(scope){
+	this.createVisit = function(scope,patient){
 		$http({
 			method : 'POST',
 			url : context + 'visit/create',
 			headers : {
 				'Content-type' : 'application/json'
 			},
-			data : self.populateVisitData(scope)
+			data : self.populateVisitData(scope,patient.id)
 		}).success(function(data,status){
 			scope.isSuccess = true;
 			scope.message = 'Visit created successfully!';
+			self.fetchVisits(scope,patient.id);
 		}).error(function(data,status){
 			scope.message = 'Some error occurred !';
 		});

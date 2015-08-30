@@ -1,11 +1,13 @@
-controllers.controller('PatientController',['$scope','$location','PatientService',function($scope,$location,patientService){
+controllers.controller('PatientController',
+		['$scope','$location','PatientService',
+		 function($scope,$location,patientService){
 	$scope.pageTitle = 'Create Patient';
-	$scope.editingPatient = false;
+	$scope.isEditing = false;
 	
-	if($location.search().PTE!=undefined){
-		var patient = $location.search().PTE;
-		$scope.pageTitle = patient.pageTitle;
-		$scope.editingPatient = patient.editingPatient;
+	if(patientService.getPatient().isEditing){
+		var patient = patientService.getPatient();
+		$scope.pageTitle = 'Edit Patient';
+		$scope.isEditing = patient.isEditing;
 		patientService.populateReqModelsForEditing(patient,$scope);
 	}
 
@@ -19,17 +21,18 @@ controllers.controller('PatientController',['$scope','$location','PatientService
 	
 	$scope.update = function(){
 		patientService.update($scope);
+		patientService.resetPatient();
+		patientService.resetModelsForEditing($scope);
 	}
 	
 	$scope.editPatient = function(patientToEdit){
-		patientToEdit.editingPatient = true;
-		patientToEdit.pageTitle = 'Edit Patient';
-		$location.search('PTE',patientToEdit);
-		$location.path('/patient/create');
+		patientToEdit.isEditing = true;
+		patientService.setCurrentPatient(patientToEdit);
+		$location.path('/patient/edit');
 	}
 	
 	$scope.createVisit = function(patient){
-		$location.search('PID',patient.id);
+		patientService.setCurrentPatient(patient);
 		$location.path('/visit/create');
 	}
 	

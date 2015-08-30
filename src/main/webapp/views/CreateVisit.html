@@ -1,5 +1,10 @@
 <title>{{pageTitle}}</title>
 <div class="row">
+	<div class="col-md-12">
+		<h3 class="text-info text-center">{{patient.firstName}} {{patient.lastName}}</h3>
+	</div>
+</div>
+<div class="row">
 	<div class="col-md-6">
 		<div class="row">
 			<h3 class="text-info text-center">{{pageTitle}}</h3>
@@ -86,7 +91,7 @@
 					<thead>
 						<tr>
 							<th>Sr.No</th>
-							<th>Date</th>
+							<th>VisiteOn</th>
 							<th>Allergies</th>
 							<th>Symptoms</th>
 							<th>Prescriptions</th>
@@ -95,10 +100,25 @@
 					<tbody ng-repeat="visit in visits">
 						<tr>
 							<td scope="row">{{$index+1}}</td>
-							<td>{{visit.date}}</td>
-							<td>{{visit.allergies}}</td>
-							<td>{{visit.symptoms}}</td>
-							<td>{{visit.prescriptions}}</td>
+							<td>
+								{{visit.visitedOn|date:'dd-MMM-yyyy'}}<br/>
+								{{visit.visitedOn|date:'HH:mm:ss a'}}
+							</td>
+							<td>
+								<div ng-repeat="allergy in visit.allergies" class="row">
+									{{$index+1}}] {{allergy}}
+								</div>
+							</td>
+							<td>
+								<div ng-repeat="symptom in visit.symptoms" class="row">
+									{{$index+1}}] {{symptom}}
+								</div>
+							</td>
+							<td>
+								<div ng-repeat="prescription in visit.prescriptions" class="row">
+									{{$index+1}}] {{prescription}}
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>

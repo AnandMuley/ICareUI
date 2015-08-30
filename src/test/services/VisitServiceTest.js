@@ -71,11 +71,19 @@ describe('VISIT SERVICE TEST SUITE :',function(){
 		scope.prescriptions = medicineDataProvider.prescriptions;
 		scope.problems = 'Cough and Cold';
 		scope.allergies = 'Peanuts';
+		var patient = {
+				id : '55e1c74044aea5be4f8e5a82'
+		};
+		
+		var patients = [1];
 		
 		httpBackend.when('POST',context+'visit/create').respond(200);
 		
 		// WHEN
-		visitService.createVisit(scope);
+		visitService.createVisit(scope,patient);
+		
+		httpBackend.when('GET',context+'visit/findall?pid='+patient.id).respond(200);
+		
 		httpBackend.flush();
 		
 		// THEN
@@ -87,11 +95,14 @@ describe('VISIT SERVICE TEST SUITE :',function(){
 		scope.prescriptions = medicineDataProvider.prescriptions;
 		scope.problems = 'Cough and Cold';
 		scope.allergies = 'Peanuts';
+		var patient = {
+				id : '55e1c74044aea5be4f8e5a82'
+		};
 		
 		httpBackend.when('POST',context+'visit/create').respond(500);
 		
 		// WHEN
-		visitService.createVisit(scope);
+		visitService.createVisit(scope,patient);
 		httpBackend.flush();
 		
 		// THEN

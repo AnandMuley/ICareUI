@@ -30,23 +30,5 @@ app.config(['$routeProvider',function($routeProvider){
 		});
 }]);
 
-app.controller('NavCtrl',['$scope','$location',function($scope,$location){
-	$scope.menus = [
-	    {
-	    	'title' : 'Login',
-	    	'href' : '#/login'
-	    },
-	    {
-	    	'title' : 'About',
-	    	'href' : '#/about'
-	    }
-	 ];
-	$scope.selectedTab = 'Login';
-	$scope.selectTab= function(selectedTab){
-		$scope.selectedTab = selectedTab;
-	}
-	
-}]);
-
 var controllers = angular.module('ICareUIControllers',[]);
 var services = angular.module('ICareUIServices',[]);

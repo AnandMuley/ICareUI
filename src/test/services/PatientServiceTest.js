@@ -66,6 +66,21 @@ describe('PATIENT SERVICE TEST SUITE:',function(){
 		expect($scope.patientsFound.length).toBe(2);
 	});
 	
+	it('Should handle internal server error while searching patients',function(){
+		// GIVEN
+		$scope.searchTxt='';
+		$httpBackend.when('GET',REST_URLS.PATIENT_FIND_BY_NAME+$scope.searchTxt).respond(500);
+		
+		// WHEN
+		patientService.searchByName($scope);
+		$httpBackend.flush();
+		
+		// THEN
+		expect($scope.isSuccess).toBe(false);
+		expect($scope.message).toBe('Some error occured');
+		
+	});
+	
 	it('Should populate patient model for editing',function(){
 		// GIVEN
 		var patientToEdit = patientDataProvider.patientToEdit;

@@ -69,8 +69,8 @@ describe('VISIT SERVICE TEST SUITE :',function(){
 	it('Should create visit',function(){
 		// GIVEN
 		scope.prescriptions = medicineDataProvider.prescriptions;
-		scope.problems = 'Cough and Cold';
-		scope.allergies = 'Peanuts';
+		scope.problems = "Cough and Cold";
+		scope.allergies = "Peanuts";
 		var patient = {
 				id : '55e1c74044aea5be4f8e5a82'
 		};
@@ -93,8 +93,8 @@ describe('VISIT SERVICE TEST SUITE :',function(){
 	it('Should show an error message if visit is not saved',function(){
 		// GIVEN
 		scope.prescriptions = medicineDataProvider.prescriptions;
-		scope.problems = 'Cough and Cold';
-		scope.allergies = 'Peanuts';
+		scope.problems = "Cough and Cold";
+		scope.allergies = "Peanuts";
 		var patient = {
 				id : '55e1c74044aea5be4f8e5a82'
 		};
@@ -107,6 +107,23 @@ describe('VISIT SERVICE TEST SUITE :',function(){
 		
 		// THEN
 		expect(scope.message).toBe('Some error occurred !');
+	});
+	
+	it('Should handle internal server error while fetching visits',function(){
+		// GIVEN
+		var patientId = 'PID101';
+		var visits = [{
+		            	"id":"VID101"  
+		              }]
+		
+		httpBackend.when('GET',context+'visit/findall?pid='+patientId).respond(500);
+		
+		// WHEN
+		visitService.fetchVisits(scope,patientId);
+		httpBackend.flush();
+		
+		// THEN
+		expect(scope.message).toBe('Some error occured !');
 	});
 	
 });

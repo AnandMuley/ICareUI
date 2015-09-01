@@ -130,9 +130,11 @@ describe('VISIT CONTROLLER TEST SUITE : ',function(){
 	it('Should create a visit record in DB',function(){
 		// GIVEN
 		$scope.prescriptions = dataProvider.prescriptions;
-		$scope.problems = 'Cough and Cold';
-		$scope.allergies = 'Peanuts';
+		$scope.symptoms = "Cough and Cold";
+		$scope.allergies = "Peanuts";
 		$scope.pid = 'abcd-12ad-hx23-12asr';
+		$scope.medicines = [{"id":"101","name":"Crocine"}];
+		$scope.medSrchTxt = "";
 		
 		$httpBackend.when(HTTP_METHOD.POST,REST_URLS.CREATE_VISIT,function(data){
 			var dataSent = JSON.parse(data);
@@ -142,8 +144,8 @@ describe('VISIT CONTROLLER TEST SUITE : ',function(){
 			expect(prescriptions[0]).toBe('Crocine');
 			expect(prescriptions[1]).toBe('Crocold');
 			
-			expect(dataSent.symptoms[0]).toBe('Cough and Cold');
-			expect(dataSent.allergies[0]).toBe('Peanuts');
+			expect(dataSent.symptoms).toBe('Cough and Cold');
+			expect(dataSent.allergies).toBe('Peanuts');
 			
 			expect(dataSent.patientId).toBe('abcd-12ad-hx23-12asr');
 			
@@ -155,13 +157,17 @@ describe('VISIT CONTROLLER TEST SUITE : ',function(){
 		
 		// WHEN
 		$scope.createVisit();
-		
-		
-		
 		$httpBackend.flush();
 		
 		// THEN
 		expect($scope.message).toBe('Visit created successfully!');
+		// Models should get cleared
+		expect($scope.prescriptions.length).toBe(0);
+		expect($scope.symptoms).toBe("");
+		expect($scope.allergies).toBe("");
+		// Should clear medicines array
+		expect($scope.medicines.length).toBe(0);
+		expect($scope.medSrchTxt).toBe("");
 	});
 	
 });

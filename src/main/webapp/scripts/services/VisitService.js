@@ -28,24 +28,6 @@ app.service('VisitService',['$http',function($http){
 		return prescribed;
 	}
 	
-	
-	
-	this.populateVisitData = function(scope,patientId){
-		var symptoms = [];
-		symptoms.push(scope.problems);
-		
-		var allergies = [];
-		allergies.push(scope.allergies);
-		
-		var visitData = {
-				patientId : patientId,
-				prescriptions : self.toStringArr(scope.prescriptions),
-				symptoms : symptoms,
-				allergies : allergies
-		}
-		return visitData;
-	}
-	
 	this.fetchVisits = function(scope,patientId){
 		$http({
 			url:context+'visit/findall?pid='+patientId,
@@ -58,6 +40,24 @@ app.service('VisitService',['$http',function($http){
 		}).error(function(data,status){
 			scope.message = 'Some error occured !';
 		});
+	}
+	
+	this.clearVisitModels = function(scope){
+		scope.prescriptions = [];
+		scope.symptoms = "";
+		scope.allergies = "";
+		scope.medSrchTxt = "";
+		scope.medicines = [];
+	}
+	
+	this.populateVisitData = function(scope,patientId){
+		var visitData = {
+				patientId : patientId,
+				prescriptions : self.toStringArr(scope.prescriptions),
+				symptoms : scope.symptoms,
+				allergies : scope.allergies
+		}
+		return visitData;
 	}
 	
 	this.createVisit = function(scope,patient){

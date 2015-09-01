@@ -20,6 +20,10 @@ controllers.controller('VisitController',
 	
 	$scope.createVisit = function(){
 		visitService.createVisit($scope,$scope.patient);
+		visitService.clearVisitModels($scope);
+		$("#message-container").fadeTo(2000, 500).slideUp(500, function(){
+		    $("#message-container").alert('close');
+		});
 	}
 	
 }]);

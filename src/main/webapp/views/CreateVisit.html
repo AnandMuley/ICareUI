@@ -56,8 +56,8 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-5">
-				<textarea ng-model="problems" rows="3" class="form-control"
-					placeholder="Problems"></textarea>
+				<textarea ng-model="symptoms" rows="3" class="form-control"
+					placeholder="Symptoms"></textarea>
 			</div>
 			<div class="col-md-5">
 				<textarea ng-model="allergies" rows="3" class="form-control"
@@ -73,7 +73,7 @@
 			</div>
 		</div>
 		<br />
-		<div ng-show="message!=null" class="row">
+		<div id="message-container" ng-show="message!=null" class="row">
 			<div class="col-md-12">
 				<div align="center" class="alert"
 					ng-class="{'alert-success':isSuccess,'alert-danger':!isSuccess}"
@@ -104,16 +104,8 @@
 								{{visit.visitedOn|date:'dd-MMM-yyyy'}}<br/>
 								{{visit.visitedOn|date:'HH:mm:ss a'}}
 							</td>
-							<td>
-								<div ng-repeat="allergy in visit.allergies" class="row">
-									{{$index+1}}] {{allergy}}
-								</div>
-							</td>
-							<td>
-								<div ng-repeat="symptom in visit.symptoms" class="row">
-									{{$index+1}}] {{symptom}}
-								</div>
-							</td>
+							<td>{{visit.allergies}}</td>
+							<td>{{visit.symptoms}}</td>
 							<td>
 								<div ng-repeat="prescription in visit.prescriptions" class="row">
 									{{$index+1}}] {{prescription}}

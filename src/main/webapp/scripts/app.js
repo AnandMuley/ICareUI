@@ -27,6 +27,9 @@ app.config(['$routeProvider',function($routeProvider){
 		}).when('/visit/create',{
 			templateUrl:'views/CreateVisit.html',
 			controller : 'VisitController'
+		}).when('/appointment/create',{
+			templateUrl : 'views/CreateAppointment.html',
+			controller : 'AppointmentController'
 		});
 }]);
 

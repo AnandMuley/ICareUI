@@ -7,39 +7,39 @@
 		<div class="col-md-6">
 			<div class="row">
 				<div class="col-md-6">
-					<input required="required" class="form-control input-group-lg" ng-model="firstName" placeholder="First Name"/>
+					<input required="required" class="form-control input-group-lg" ng-model="appointment.firstName" placeholder="First Name"/>
 				</div>
 				<div class="col-md-6">
-					<input required="required" class="form-control input-group-lg" ng-model="lastName" placeholder="Last Name"/>
+					<input required="required" class="form-control input-group-lg" ng-model="appointment.lastName" placeholder="Last Name"/>
 				</div>
 			</div>
 			<br/>
 			<div class="row">
 				<div class="col-md-6">
-					<input maxlength="10" required="required" type="tel" class="form-control input-group-lg" ng-model="mobileNo" placeholder="Mobile No"/>
+					<input maxlength="10" required="required" type="tel" class="form-control input-group-lg" ng-model="appointment.mobileNo" placeholder="Mobile No"/>
 				</div>
 				<div class="col-md-6">
-					<input type="email" class="form-control input-group-lg" ng-model="emailId" placeholder="EmailId"/>
+					<input type="email" class="form-control input-group-lg" ng-model="appointment.emailId" placeholder="EmailId"/>
 				</div>
 			</div>
 			<br/>
 			<div class="row">
 				<div class="col-md-3"></div>
 				<div class="col-md-6">
-					<input required="required" type="date" class="form-control input-group-lg" ng-model="forDate" placeholder="For Date"/>
+					<input required="required" type="date" class="form-control input-group-lg" ng-model="appointment.datedOn" placeholder="For Date"/>
 				</div>
 			</div>
 			<br/>
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<button ng-click="create()" class="btn btn-lg btn-primary btn-block" type="submit">CREATE</button>
+					<button ng-click="create(appointment)" class="btn btn-lg btn-primary btn-block" type="submit">CREATE</button>
 				</div>
 			</div>
 			<br/>
-			<div ng-show="message!=null" class="row">
+			<div ng-show="appointment.message!=null" class="row">
 				<div class="col-md-12">
-					<div class="alert" ng-class="{'alert-success':isSuccess,'alert-danger':!isSuccess}" role="alert">{{message}}</div>
+					<div class="alert" ng-class="{'alert-success':appointment.isSuccess,'alert-danger':!appointment.isSuccess}" role="alert">{{appointment.message}}</div>
 				</div>
 			</div>
 		</div>

@@ -2,7 +2,7 @@ describe('APPOINTMENT SERVICE TEST SUITE:', function() {
 	
 	var appointmentService,appointmentDataProvider,$httpBackend;
 	var context = 'http://localhost:8090/ICareRest/rest/';
-	var appointments;
+	var patient,$filter;
 	
 	beforeEach(module('ICareUI'));
 	
@@ -11,6 +11,7 @@ describe('APPOINTMENT SERVICE TEST SUITE:', function() {
 		appointmentDataProvider = AppointmentDataProvider;
 		$httpBackend = $injector.get('$httpBackend');
 		patient = {};
+		$filter = $injector.get('$filter');
 	}));
 	
 	it('Should create appointment',function(){
@@ -24,7 +25,7 @@ describe('APPOINTMENT SERVICE TEST SUITE:', function() {
 			expect(appointmentData.lastName).toBe('Malhotra');
 			expect(appointmentData.mobileNo).toBe(7890098700);
 			expect(appointmentData.emailId).toBe('ashish@gmail.com');
-			expect(appointmentData.forDate).toBe('09/04/2015');
+			expect(appointmentData.datedOn).toBe($filter('date')(appointment.datedOn,'dd-MMM-yyyy'));
 			return true
 		}).respond(200);
 		
@@ -33,14 +34,20 @@ describe('APPOINTMENT SERVICE TEST SUITE:', function() {
 		$httpBackend.flush();
 		
 		// THEN
-		expect(appointmentService.getMessage()).toBe('Appointment created successfully !');
+		expect(appointment.message).toBe('Appointment created successfully !');
+		// Should reset form fields
+		expect(appointment.firstName).toBe(null);
+		expect(appointment.lastName).toBe(null);
+		expect(appointment.emailId).toBe(null);
+		expect(appointment.mobileNo).toBe(null);
+		expect(appointment.datedOn).toBe(null);
+		
 	});
 	
 	it('Should handle error scenario',function(){
 		// GIVEN
 		var appointment = appointmentDataProvider.createAppointment;
-		appointment.forDate = '09/04/2012';
-		var message = '';
+		appointment.datedOn = '09/04/2012';
 		
 		$httpBackend.when('POST',context+'appointment/create',function(dataSent){
 			var appointmentData = JSON.parse(dataSent);
@@ -56,25 +63,27 @@ describe('APPOINTMENT SERVICE TEST SUITE:', function() {
 		$httpBackend.flush();
 		
 		// THEN
-		expect(appointmentService.getMessage()).toBe('Something went wrong !');
+		expect(appointment.message).toBe('Something went wrong !');
 	});
 	
 	it('Should fetch today"s appointments',function(){
 		// GIVEN
-		appointments = {
-				datedOn :'09/04/2015'
+		var today = new Date();
+		appointment = {
+			datedOn : today
 		}
+		var strDateOn = $filter('date')(today,'dd-MMM-yyyy');
 		
 		var appointmentsFound = appointmentDataProvider.fetchAppointments;
 		
-		$httpBackend.when('GET',context+'appointment/findby?datedOn='+appointments.datedOn).respond(200,appointmentsFound);
+		$httpBackend.when('GET',context+'appointment/findby?datedOn='+strDateOn).respond(200,appointmentsFound);
 		
 		// WHEN
-		appointmentService.fetchBy(appointments);
+		appointmentService.fetchBy(appointment);
 		$httpBackend.flush();
 		
 		// THEN
-		expect(appointments.list.length).toBe(2);
+		expect(appointment.resultlist.length).toBe(2);
 	});
 	
 });

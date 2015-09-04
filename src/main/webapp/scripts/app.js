@@ -30,6 +30,9 @@ app.config(['$routeProvider',function($routeProvider){
 		}).when('/appointment/create',{
 			templateUrl : 'views/CreateAppointment.html',
 			controller : 'AppointmentController'
+		}).when('/appointment/queue',{
+			templateUrl : 'views/ViewAppointments.html',
+			controller : 'AppointmentController'
 		});
 }]);
 

@@ -1,4 +1,4 @@
-app.service('AppointmentService',['$http',function($http){
+app.service('AppointmentService',['$http','$filter',function($http,$filter){
 	
 	var context = 'http://localhost:8090/ICareRest/rest/';
 	var self = this;
@@ -6,6 +6,8 @@ app.service('AppointmentService',['$http',function($http){
 	var appointments=[];
 	
 	this.createNew = function(appointment){
+		appointment.datedOn = convertToValidFormat(new Date(appointment.datedOn));
+		
 		$http({
 			url : context+'appointment/create',
 			method : 'POST',
@@ -14,21 +16,28 @@ app.service('AppointmentService',['$http',function($http){
 			},
 			data : appointment
 		}).success(function(status){
-			self.setMessage('Appointment created successfully !');
+			appointment.message = 'Appointment created successfully !';
+			appointment.isSuccess = true;
+			self.resetFormFields(appointment);
 		}).error(function(){
-			self.setMessage('Something went wrong !');
+			appointment.message = 'Something went wrong !';
+			appointment.isSuccess = false;
 		});
 	}
 	
-	this.fetchBy = function(appointments){
+	convertToValidFormat = function (datedOn){
+		return $filter('date')(datedOn,'dd-MMM-yyyy');
+	}
+	
+	this.fetchBy = function(appointment){
 		$http({
-			url : context+'appointment/findby?datedOn='+appointments.datedOn,
+			url : context+'appointment/findby?datedOn='+convertToValidFormat(appointment.datedOn),
 			method : 'GET',
 			headers : {
 				'Content-type':'application/json'
 			}
 		}).success(function(data,status){
-			appointments.list = data;
+			appointment.resultlist = data;
 		}).error(function(data,status){
 			console.log('Something went wrong !');
 		});
@@ -48,6 +57,14 @@ app.service('AppointmentService',['$http',function($http){
 	
 	this.getAppointments = function(){
 		return appointments;
+	}
+	
+	this.resetFormFields = function(appointment){
+		appointment.firstName = null;
+		appointment.lastName = null;
+		appointment.emailId = null;
+		appointment.mobileNo = null;
+		appointment.datedOn = null;
 	}
 	
 }]);

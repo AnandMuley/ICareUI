@@ -1,0 +1,33 @@
+<title>{{pageTitle}}</title>
+<!-- <h3 class="text-info text-center">{{pageTitle}}</h3> -->
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-2 text-right text-info icare-label"><b>Select Date:</b></div>
+	<div class="col-md-2" align="center">
+		 <input ng-change="search(appointment)" required="required" type="date" class="form-control input-group-lg" ng-model="appointment.datedOn" placeholder="For Date"/>
+	</div>
+</div>
+<br/>
+<div ng-if="appointment.resultlist" class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8 panel panel-default">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Sr.No</th>
+					<th>Name</th>
+					<th>MobileNo</th>
+					<th>EmailId</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="appointment in appointment.resultlist">
+					<td scope="row">{{$index+1}}</td>
+					<td>{{appointment.firstName}} {{appointment.lastName}}</td>
+					<td>{{appointment.mobileNo}}</td>
+					<td>{{appointment.emailId}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

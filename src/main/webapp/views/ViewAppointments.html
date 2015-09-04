@@ -8,26 +8,40 @@
 	</div>
 </div>
 <br/>
-<div ng-if="appointment.resultlist" class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8 panel panel-default">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Sr.No</th>
-					<th>Name</th>
-					<th>MobileNo</th>
-					<th>EmailId</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="appointment in appointment.resultlist">
-					<td scope="row">{{$index+1}}</td>
-					<td>{{appointment.firstName}} {{appointment.lastName}}</td>
-					<td>{{appointment.mobileNo}}</td>
-					<td>{{appointment.emailId}}</td>
-				</tr>
-			</tbody>
-		</table>
+<div ng-if="appointment.livequeue" class="row">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
+			<h3 class="text-info text-center">Current Queue</h3>
+		</div>
+		<div class="col-md-4">
+			<h3 class="text-info text-center">On Hold</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
+			<div class="thumbnail col-sm-12 col-md-12 patient-queue-container"
+				ng-repeat="appointment in appointment.livequeue">
+				<div class="col-md-4">
+					<img
+						src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add-user.png"
+						alt="Image NA" width="60">
+				</div>
+				<div class="col-md-8">
+					<div class="row label-patient-name">
+						<div class="col-md-10">{{appointment.firstName}} {{appointment.lastName}}</div>
+						<div class="col-md-1">{{$index+1}}</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">{{appointment.mobileNo}}</div>
+					</div>
+					<div class="row">
+						<div class="col-md-9">{{appointment.emailId}}</div>
+						<div class="col-md-2 onhold-label">OnHold<span class="glyphicon glyphicon-chevron-right" style="display: inline;"></span></div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

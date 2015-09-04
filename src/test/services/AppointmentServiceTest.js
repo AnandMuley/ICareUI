@@ -83,7 +83,7 @@ describe('APPOINTMENT SERVICE TEST SUITE:', function() {
 		$httpBackend.flush();
 		
 		// THEN
-		expect(appointment.resultlist.length).toBe(2);
+		expect(appointment.livequeue.length).toBe(2);
 	});
 	
 });

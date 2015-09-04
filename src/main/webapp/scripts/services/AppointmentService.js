@@ -37,7 +37,7 @@ app.service('AppointmentService',['$http','$filter',function($http,$filter){
 				'Content-type':'application/json'
 			}
 		}).success(function(data,status){
-			appointment.resultlist = data;
+			appointment.livequeue = data;
 		}).error(function(data,status){
 			console.log('Something went wrong !');
 		});

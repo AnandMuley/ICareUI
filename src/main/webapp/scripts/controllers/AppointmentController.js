@@ -1,4 +1,5 @@
-controllers.controller('AppointmentController',['$scope','AppointmentService',function($scope,appointmentService){
+controllers.controller('AppointmentController',
+		['$scope','AppointmentService','PatientQueueService',function($scope,appointmentService,patientQueueService){
 	$scope.pageTitle = 'Create Appointment';
 	
 	$('#createAppointmentFrm').submit(function(e){
@@ -14,5 +15,11 @@ controllers.controller('AppointmentController',['$scope','AppointmentService',fu
 	$scope.search = function(appointment){
 		appointmentService.fetchBy(appointment);
 	}
+	
+	$scope.putOnHold = function(patient){
+		patientQueueService.putOnHold(patient.name,$scope.appointment);
+	}
+	
+	
 	
 }]);

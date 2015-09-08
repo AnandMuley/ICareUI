@@ -22,7 +22,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-4">
 			<div class="thumbnail col-sm-12 col-md-12 patient-queue-container"
-				ng-repeat="appointment in appointment.livequeue">
+				ng-repeat="patient in appointment.livequeue">
 				<div class="col-md-4">
 					<img
 						src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add-user.png"
@@ -30,14 +30,37 @@
 				</div>
 				<div class="col-md-8">
 					<div class="row label-patient-name">
-						<div class="col-md-10">{{appointment.firstName}} {{appointment.lastName}}</div>
+						<div class="col-md-10">{{patient.name}}</div>
 						<div class="col-md-1">{{$index+1}}</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12">{{appointment.mobileNo}}</div>
+						<div class="col-md-12">{{patient.mobileNo}}</div>
 					</div>
 					<div class="row">
-						<div class="col-md-9">{{appointment.emailId}}</div>
+						<div class="col-md-9">{{patient.emailId}}</div>
+						<div ng-click="putOnHold(patient)" class="col-md-2 onhold-label">OnHold<span class="glyphicon glyphicon-chevron-right" style="display: inline;"></span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="thumbnail col-sm-12 col-md-12 patient-queue-container"
+				ng-repeat="patient in appointment.onholdqueue">
+				<div class="col-md-4">
+					<img
+						src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add-user.png"
+						alt="Image NA" width="60">
+				</div>
+				<div class="col-md-8">
+					<div class="row label-patient-name">
+						<div class="col-md-10">{{patient.name}}</div>
+						<div class="col-md-1">{{$index+1}}</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">{{patient.mobileNo}}</div>
+					</div>
+					<div class="row">
+						<div class="col-md-9">{{patient.emailId}}</div>
 						<div class="col-md-2 onhold-label">OnHold<span class="glyphicon glyphicon-chevron-right" style="display: inline;"></span></div>
 					</div>
 				</div>

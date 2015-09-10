@@ -86,4 +86,16 @@ describe('APPOINTMENT SERVICE TEST SUITE:', function() {
 		expect(appointment.livequeue.length).toBe(2);
 	});
 	
+	it('Should set and get the same message',function(){
+		// GIVEN
+		var message = 'Appointment created successfully !';
+		appointmentService.setMessage(message);
+		
+		// WHEN
+		var actual = appointmentService.getMessage();
+		
+		// THEN
+		expect(actual).toBe(message);
+	});
+	
 });

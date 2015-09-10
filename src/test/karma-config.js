@@ -7,11 +7,11 @@ module.exports = function(config) {
 				'node_modules/angular-route/angular-route.js',
 				'../main/webapp/scripts/**/*.js', 'controllers/*.js',
 				'services/*.js', 'dataproviders/*.js' ],
-//		preprocessors : {
-//			'../main/webapp/scripts/**/*.js' : 'coverage'
-//		},
-//		reporters : [ 'coverage', 'spec' ],
-		reporters : ['spec'],
+		preprocessors : {
+			'../main/webapp/scripts/**/*.js' : 'coverage'
+		},
+		reporters : [ 'coverage', 'spec' ],
+//		reporters : ['spec'],
 		autoWatch : true,
 		browsers : [ 'PhantomJS' ],
 		plugins : [ 'karma-jasmine', 'karma-phantomjs-launcher',

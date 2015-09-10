@@ -1,7 +1,7 @@
 describe('APPOINTMENT CONTROLLER TEST SUITE:',function(){
 	
 	var appointmentController,$scope,appointmentFrm,appointmentDataProvider;
-	var $httpBackend;
+	var $httpBackend,$filter;
 	var context = 'http://localhost:8090/ICareRest/rest/';
 	
 	beforeEach(module('ICareUI'));
@@ -11,6 +11,7 @@ describe('APPOINTMENT CONTROLLER TEST SUITE:',function(){
 		
 		appointmentDataProvider = AppointmentDataProvider;
 		$httpBackend = $injector.get('$httpBackend');
+		$filter = $injector.get('$filter');
 		
 		createController = function(){
 			return $controller('AppointmentController',{
@@ -67,6 +68,46 @@ describe('APPOINTMENT CONTROLLER TEST SUITE:',function(){
 		// THEN
 		expect(appointment.message).toBe('Appointment created successfully !');
 		expect(appointment.isSuccess).toBe(true);
+	});
+	
+	it('Should search an appointment for a given date',function(){
+		// GIVEN
+		var today = new Date();
+		var appointment = {
+			datedOn : today
+		}
+		var strDateOn = $filter('date')(today,'dd-MMM-yyyy');
+		var appointmentsFound = appointmentDataProvider.fetchAppointments;
+		
+		$httpBackend.when('GET',context+'appointment/findby?datedOn='+strDateOn).respond(200,appointmentsFound);
+		
+		// WHEN
+		$scope.search(appointment);
+		$httpBackend.flush();
+		
+		// THEN
+		expect(appointment.livequeue.length).toBe(2);
+	});
+	
+	it('Should move a patient from live queue to onhold queue',function(){
+		// GIVEN
+		$scope.appointment = {
+			livequeue:[{
+				'name' : 'Ankush Mehra'
+			},{
+				'name' : 'Raj Mehra'
+			}]
+		}
+		var patient = {
+				name : 'Ankush Mehra'
+		};
+		
+		// WHEN
+		$scope.putOnHold(patient);
+		
+		// THEN
+		expect($scope.appointment.onholdqueue.length).toBe(1);
+		expect($scope.appointment.onholdqueue[0].name).toBe('Ankush Mehra');
 	});
 	
 });

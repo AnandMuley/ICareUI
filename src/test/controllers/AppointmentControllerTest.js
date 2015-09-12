@@ -22,6 +22,7 @@ describe('APPOINTMENT CONTROLLER TEST SUITE:',function(){
 		
 		createController();
 		
+		
 	}));
 
 	function createAppointmentForm(valid){
@@ -96,7 +97,8 @@ describe('APPOINTMENT CONTROLLER TEST SUITE:',function(){
 				'name' : 'Ankush Mehra'
 			},{
 				'name' : 'Raj Mehra'
-			}]
+			}],
+			onholdqueue : []
 		}
 		var patient = {
 				name : 'Ankush Mehra'
@@ -108,6 +110,67 @@ describe('APPOINTMENT CONTROLLER TEST SUITE:',function(){
 		// THEN
 		expect($scope.appointment.onholdqueue.length).toBe(1);
 		expect($scope.appointment.onholdqueue[0].name).toBe('Ankush Mehra');
+	});
+	
+	it('Should not replace the existing patients in onhold queue',function(){
+		// GIVEN
+		$scope.appointment = {
+			livequeue:[{
+				'name' : 'Ankush Mehra'
+			},{
+				'name' : 'Raj Mehra'
+			},{
+				'name' : 'Arjun Pandit'
+			}],
+			onholdqueue : []
+		}
+		var patient = {
+				name : 'Ankush Mehra'
+		};
+		$scope.putOnHold(patient);
+		
+		var anotherPatient = {
+				name : 'Arjun Pandit'
+		}
+		
+		// WHEN
+		$scope.putOnHold(anotherPatient);
+		
+		// THEN
+		expect($scope.appointment.onholdqueue.length).toBe(2);
+		expect($scope.appointment.onholdqueue[0].name).toBe('Ankush Mehra');
+		expect($scope.appointment.onholdqueue[1].name).toBe('Arjun Pandit');
+	});
+	
+	it('Should move the patient from onhold queue to live queue',function(){
+		// GIVEN
+		$scope.appointment = {
+				livequeue : [{
+					'name' : 'Ankush Mehra'
+				}],
+				onholdqueue:[{
+					'name' : 'Raj Mehra'
+				},{
+					'name' : 'Arjun Pandit'
+				}]
+		}
+		var patient = {
+				name : 'Raj Mehra'
+		};
+		$scope.moveBackToLive(patient);
+
+		var anotherPatient = {
+				name : 'Arjun Pandit'
+		}
+
+		// WHEN
+		$scope.moveBackToLive(anotherPatient);
+
+		// THEN
+		expect($scope.appointment.livequeue.length).toBe(3);
+		expect($scope.appointment.livequeue[0].name).toBe('Arjun Pandit');
+		expect($scope.appointment.livequeue[1].name).toBe('Raj Mehra');
+		expect($scope.appointment.livequeue[2].name).toBe('Ankush Mehra');
 	});
 	
 });

@@ -20,11 +20,12 @@ controllers.controller('AppointmentController',
 	}
 	
 	$scope.putOnHold = function(patient){
-		patientQueueService.putOnHold(patient.name,$scope.appointment);
+		// Here patient is appointment
+		patientQueueService.putOnHold(patient.id,$scope.appointment);
 	}
 	
 	$scope.moveBackToLive = function(patient){
-		patientQueueService.moveToLive(patient.name,$scope.appointment);
+		patientQueueService.moveToLive(patient.id,$scope.appointment.patientqueue);
 	}
 	
 	

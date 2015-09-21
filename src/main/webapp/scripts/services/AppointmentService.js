@@ -32,7 +32,7 @@ app.service('AppointmentService',['$http','$filter',function($http,$filter){
 	this.fetchBy = function(appointment){
 		var qid = appointment.patientqueue == undefined?'':appointment.patientqueue.id;
 		$http({
-			url : context+'appointment/findby?datedOn='+convertToValidFormat(appointment.datedOn)+'&qid='+qid,
+			url : context+'appointment/findby?datedOn='+convertToValidFormat(new Date((appointment.datedOn)))+'&qid='+qid,
 			method : 'GET',
 			headers : {
 				'Content-type':'application/json'

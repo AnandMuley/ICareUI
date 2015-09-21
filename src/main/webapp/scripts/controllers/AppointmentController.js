@@ -25,7 +25,7 @@ controllers.controller('AppointmentController',
 	}
 	
 	$scope.moveBackToLive = function(patient){
-		patientQueueService.moveToLive(patient.id,$scope.appointment.patientqueue);
+		patientQueueService.moveToLive(patient.id,$scope.appointment);
 	}
 	
 	

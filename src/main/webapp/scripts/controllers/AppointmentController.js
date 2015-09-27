@@ -2,8 +2,10 @@ controllers.controller('AppointmentController',
 		['$scope','AppointmentService','PatientQueueService',function($scope,appointmentService,patientQueueService){
 	$scope.pageTitle = 'Create Appointment';
 	$scope.appointment = {
-			onholdqueue : []
+			onholdqueue : [],
+			datedOn : new Date()
 	}
+	appointmentService.fetchBy($scope.appointment);
 	
 	$('#createAppointmentFrm').submit(function(e){
 	    return false;

@@ -1,14 +1,14 @@
 @CHARSET "ISO-8859-1";
 
-#content-area{
-	min-height: 300px;	
+#content-area {
+	min-height: 300px;
 }
 
-.pres-row{
+.pres-row {
 	margin-bottom: 5px;
 }
 
-.icare-label{
+.icare-label {
 	padding-top: 5px !important;
 }
 
@@ -23,11 +23,20 @@
 	text-align: right;
 }
 
-.onhold-label:HOVER{
+.onhold-label:HOVER {
 	cursor: pointer;
 	font-weight: bold;
 }
 
-.label-patient-name{
+.label-patient-name {
 	font-size: 20px;
+}
+
+.login-header-spacer {
+	height: 120px;
+}
+
+.site-title {
+	color: #EE5921;
+	font-size: 40px;
 }

@@ -8,20 +8,16 @@ app.config(['$routeProvider',function($routeProvider){
 		when('/',{
 			templateUrl : 'views/Login.html',
 			controller : 'LoginController'
-		}).
-		when('/home',{
+		}).when('/home',{
 			templateUrl : 'views/Home.html',
 			controller : 'HomeController'
-		}).
-		when('/patient/create',{
+		}).when('/patient/create',{
 			templateUrl : 'views/CreatePatient.html',
 			controller : 'PatientController'
-		}).
-		when('/patient/edit',{
+		}).when('/patient/edit',{
 			templateUrl : 'views/CreatePatient.html',
 			controller : 'PatientController'
-		}).
-		when('/patient/search',{
+		}).when('/patient/search',{
 			templateUrl : 'views/SearchPatient.html',
 			controller : 'PatientController'
 		}).when('/visit/create',{

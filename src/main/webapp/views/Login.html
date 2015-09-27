@@ -1,22 +1,37 @@
 <title>{{pageTitle}}</title>
-<br>
+<div class="row login-header-spacer">
+	
+</div>
 <div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
-		<input ng-model="username" type="text" placeholder="Username" class="form-control input-lg" />
+		<h2 class="site-title">ICare</h2>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<input ng-model="user.username" type="text" placeholder="Username" class="form-control input-lg" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
-		<input ng-model="password" type="password" placeholder="Password" class="form-control input-lg" />
+		<input ng-model="user.password" type="password" placeholder="Password" class="form-control input-lg" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4" align="center">
-		<button type="button" ng-click="authenticate()" class="btn btn-lg btn-success">Login</button>
+		<button type="button" ng-click="login()" class="btn btn-lg btn-success">Login</button>
+	</div>
+</div>
+<br/>
+<div class="row" ng-if="user.message">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<div class="alert alert-danger">{{user.message}}</div>
 	</div>
 </div>

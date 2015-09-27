@@ -1,9 +1,14 @@
 controllers.controller('LoginController',
-		['$scope','LoginService','$location',function($scope,loginService,$location){
+		['$scope','LoginService','$location','$rootScope',
+		 	function($scope,loginService,$location,$rootScope){
 	$scope.pageTitle = 'Login Page';
-	$scope.authenticate = function(){
-		if(loginService.authenticate($scope.username,$scope.password)){
+	$scope.login = function(){
+		loginService.authenticate($scope.user);
+		if($scope.user.authenticated){
 			$location.path('/home');
+			$rootScope.authenticated=true;
+		}else{
+			$scope.user.message = 'Authentication failed !';
 		}
 	}
 }]);

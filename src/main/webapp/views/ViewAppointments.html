@@ -42,6 +42,9 @@
 					</div>
 				</div>
 			</div>
+			<div ng-if="appointment.patientqueue.live.length==0" class="thumbnail col-sm-12 col-md-12 patient-queue-container">
+				<div align="center">No appointments in live queue</div>
+			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="thumbnail col-sm-12 col-md-12 patient-queue-container"
@@ -64,6 +67,9 @@
 						<div ng-click="moveBackToLive(patient)" class="col-md-2 onhold-label">Back<span class="glyphicon glyphicon-chevron-left" style="display: inline;"></span></div>
 					</div>
 				</div>
+			</div>
+			<div ng-if="appointment.patientqueue.onhold.length==0" class="thumbnail col-sm-12 col-md-12 patient-queue-container">
+				<div align="center">No appointments in onhold queue</div>
 			</div>
 		</div>
 	</div>

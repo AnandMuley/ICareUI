@@ -1,7 +1,8 @@
 var app = angular.module('ICareUI',[
     'ngRoute',
     'ICareUIControllers',
-    'ICareUIServices']);
+    'ICareUIServices',
+    'ngCookies']);
 
 app.config(['$routeProvider',function($routeProvider){
 	$routeProvider.

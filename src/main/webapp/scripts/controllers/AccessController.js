@@ -3,12 +3,6 @@ controllers.controller('LoginController',
 		 	function($scope,loginService,$location,$rootScope){
 	$scope.pageTitle = 'Login Page';
 	$scope.login = function(){
-		loginService.authenticate($scope.user);
-		if($scope.user.authenticated){
-			$location.path('/home');
-			$rootScope.authenticated=true;
-		}else{
-			$scope.user.message = 'Authentication failed !';
-		}
+		loginService.authenticate($scope.user,$location,$rootScope);
 	}
 }]);

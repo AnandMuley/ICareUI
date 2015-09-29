@@ -2,13 +2,14 @@ describe('HOME CONTROLLER TEST SUITE:',function(){
 	
 	var $scope;
 	
-	beforeEach(module('ICareUI'));
+	beforeEach(module('ICareUI','ngCookies'));
 	
-	beforeEach(inject(function($injector,$controller){
+	beforeEach(inject(function($injector,$controller,LoginService){
 		$scope = {};
 		createController = function(){
 			return $controller('HomeController',{
-				'$scope':$scope
+				'$scope':$scope,
+				'LoginService':LoginService
 			});
 		}
 		createController();

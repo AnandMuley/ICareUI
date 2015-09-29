@@ -32,7 +32,7 @@ app.service('AppointmentService',['$http','$filter',function($http,$filter){
 	this.fetchBy = function(appointment){
 		var qid = appointment.patientqueue == undefined?'':appointment.patientqueue.id;
 		$http({
-			url : context+'appointment/findby?datedOn='+convertToValidFormat(new Date((appointment.datedOn)))+'&qid='+qid,
+			url : context+'appointment/findby?datedOn='+convertToValidFormat(new Date(appointment.datedOn))+'&qid='+qid,
 			method : 'GET',
 			headers : {
 				'Content-type':'application/json'
@@ -40,7 +40,7 @@ app.service('AppointmentService',['$http','$filter',function($http,$filter){
 		}).success(function(data,status){
 			appointment.patientqueue = data;
 		}).error(function(data,status){
-			console.log('Something went wrong !');
+			appointment.message = 'Something went wrong !';
 		});
 	}
 	

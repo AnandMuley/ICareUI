@@ -5,8 +5,12 @@ module.exports = function(config) {
 				'node_modules/angular/angular.js',
 				'node_modules/angular-mocks/angular-mocks.js',
 				'node_modules/angular-route/angular-route.js',
-				'../main/webapp/scripts/**/*.js', 'controllers/*.js',
-				'services/*.js', 'dataproviders/*.js' ],
+				'node_modules/angular-cookies/angular-cookies.js',
+				'../main/webapp/scripts/**/*.js', 
+				'controllers/*.js',
+				'services/*.js', 
+				'dataproviders/*.js'
+				],
 		preprocessors : {
 			'../main/webapp/scripts/**/*.js' : 'coverage'
 		},

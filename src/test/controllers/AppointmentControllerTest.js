@@ -6,6 +6,20 @@ describe('APPOINTMENT CONTROLLER TEST SUITE:',function(){
 	
 	beforeEach(module('ICareUI'));
 	
+	function validateTodaysAppointments(){
+		// Should fetch todays appointments on load of controller
+		var today = new Date();
+		var appointment = {
+			datedOn : today
+		}
+		var strDateOn = $filter('date')(today,'dd-MMM-yyyy');
+		var appointmentsFound = appointmentDataProvider.fetchAppointments;
+		
+		$httpBackend.when('GET',context+'appointment/findby?datedOn='+strDateOn+'&qid=').respond(200,appointmentsFound);
+		// WHEN
+		$httpBackend.flush();
+	}
+	
 	beforeEach(inject(function($injector,$controller,AppointmentService,AppointmentDataProvider){
 		$scope = $injector.get('$rootScope');
 		
@@ -19,9 +33,8 @@ describe('APPOINTMENT CONTROLLER TEST SUITE:',function(){
 				'AppointmentService' : AppointmentService
 			});
 		}
-		
 		createController();
-		
+		validateTodaysAppointments();
 		
 	}));
 
@@ -80,97 +93,52 @@ describe('APPOINTMENT CONTROLLER TEST SUITE:',function(){
 		var strDateOn = $filter('date')(today,'dd-MMM-yyyy');
 		var appointmentsFound = appointmentDataProvider.fetchAppointments;
 		
-		$httpBackend.when('GET',context+'appointment/findby?datedOn='+strDateOn).respond(200,appointmentsFound);
+		$httpBackend.when('GET',context+'appointment/findby?datedOn='+strDateOn+'&qid=').respond(200,appointmentsFound);
 		
 		// WHEN
 		$scope.search(appointment);
 		$httpBackend.flush();
 		
 		// THEN
-		expect(appointment.livequeue.length).toBe(2);
+		expect(appointment.patientqueue.live.length).toBe(2);
 	});
 	
 	it('Should move a patient from live queue to onhold queue',function(){
 		// GIVEN
 		$scope.appointment = {
-			livequeue:[{
-				'name' : 'Ankush Mehra'
-			},{
-				'name' : 'Raj Mehra'
-			}],
-			onholdqueue : []
-		}
-		var patient = {
-				name : 'Ankush Mehra'
+				patientqueue : appointmentDataProvider.onholdPatientQueue
 		};
-		
+			
+		var patient = {
+				id : 'asd2-ti2s-2234-dsa2',
+				name : 'Rahul Verma'
+		};
+
 		// WHEN
 		$scope.putOnHold(patient);
-		
+
 		// THEN
-		expect($scope.appointment.onholdqueue.length).toBe(1);
-		expect($scope.appointment.onholdqueue[0].name).toBe('Ankush Mehra');
-	});
-	
-	it('Should not replace the existing patients in onhold queue',function(){
-		// GIVEN
-		$scope.appointment = {
-			livequeue:[{
-				'name' : 'Ankush Mehra'
-			},{
-				'name' : 'Raj Mehra'
-			},{
-				'name' : 'Arjun Pandit'
-			}],
-			onholdqueue : []
-		}
-		var patient = {
-				name : 'Ankush Mehra'
-		};
-		$scope.putOnHold(patient);
-		
-		var anotherPatient = {
-				name : 'Arjun Pandit'
-		}
-		
-		// WHEN
-		$scope.putOnHold(anotherPatient);
-		
-		// THEN
-		expect($scope.appointment.onholdqueue.length).toBe(2);
-		expect($scope.appointment.onholdqueue[0].name).toBe('Ankush Mehra');
-		expect($scope.appointment.onholdqueue[1].name).toBe('Arjun Pandit');
+		expect($scope.appointment.patientqueue.onhold.length).toBe(1);
 	});
 	
 	it('Should move the patient from onhold queue to live queue',function(){
 		// GIVEN
 		$scope.appointment = {
-				livequeue : [{
-					'name' : 'Ankush Mehra'
-				}],
-				onholdqueue:[{
-					'name' : 'Raj Mehra'
-				},{
-					'name' : 'Arjun Pandit'
-				}]
-		}
+				patientqueue : appointmentDataProvider.onholdPatientQueue
+		};
+			
 		var patient = {
+				id : 'asd2-ti2s-24s4-dsa2',
 				name : 'Raj Mehra'
 		};
+		
+		var data = appointmentDataProvider.onholdPatientQueue;
+		
+		// WHEN
 		$scope.moveBackToLive(patient);
 
-		var anotherPatient = {
-				name : 'Arjun Pandit'
-		}
-
-		// WHEN
-		$scope.moveBackToLive(anotherPatient);
-
 		// THEN
-		expect($scope.appointment.livequeue.length).toBe(3);
-		expect($scope.appointment.livequeue[0].name).toBe('Arjun Pandit');
-		expect($scope.appointment.livequeue[1].name).toBe('Raj Mehra');
-		expect($scope.appointment.livequeue[2].name).toBe('Ankush Mehra');
+		expect($scope.appointment.patientqueue.live.length).toBe(1);
 	});
 	
 });

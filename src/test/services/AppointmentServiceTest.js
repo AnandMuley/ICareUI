@@ -76,14 +76,69 @@ describe('APPOINTMENT SERVICE TEST SUITE:', function() {
 		
 		var appointmentsFound = appointmentDataProvider.fetchAppointments;
 		
-		$httpBackend.when('GET',context+'appointment/findby?datedOn='+strDateOn).respond(200,appointmentsFound);
-		
+		$httpBackend.when('GET',context+'appointment/findby?datedOn='+strDateOn+'&qid=').respond(200,appointmentsFound);
+		 
 		// WHEN
 		appointmentService.fetchBy(appointment);
 		$httpBackend.flush();
 		
 		// THEN
-		expect(appointment.livequeue.length).toBe(2);
+		expect(appointment.patientqueue.live.length).toBe(2);
+	});
+	
+	it('Should fetch today"s appointments for given date and queueid',function(){
+		// GIVEN
+		var queueId = 'a2da-dad2-raw3-sa2f';
+		var today = new Date();
+		appointment = {
+			patientqueue : {
+				id : queueId
+			},
+			datedOn : today
+		}
+		var strDateOn = $filter('date')(today,'dd-MMM-yyyy');
+		
+		var appointmentsFound = appointmentDataProvider.fetchAppointments;
+		
+		$httpBackend.when('GET',context+'appointment/findby?datedOn='+strDateOn+'&qid='+queueId).respond(200,appointmentsFound);
+		 
+		// WHEN
+		appointmentService.fetchBy(appointment);
+		$httpBackend.flush();
+		
+		// THEN
+		expect(appointment.patientqueue.live.length).toBe(2);
+	});
+	
+	it('Should show an error message if unable to fetch appointments',function(){
+		// GIVEN
+		var today = new Date();
+		appointment = {
+			datedOn : today
+		}
+		var strDateOn = $filter('date')(today,'dd-MMM-yyyy');
+		
+		var appointmentsFound = appointmentDataProvider.fetchAppointments;
+		
+		$httpBackend.when('GET',context+'appointment/findby?datedOn='+strDateOn+'&qid=').respond(500);
+		 
+		// WHEN
+		appointmentService.fetchBy(appointment);
+		$httpBackend.flush();
+		
+		// THEN
+		expect(appointment.message).toBe('Something went wrong !');
+	});
+	
+	it('Should set and get appointments for sharing across controllers',function(){
+		// GIVEN
+		var appointments = appointmentDataProvider.fetchAppointments;
+		
+		// WHEN
+		appointmentService.setAppointments(appointments);
+		
+		// THEN
+		expect(appointmentService.getAppointments().id).toBe('a2da-dad2-raw3-sa2f');
 	});
 	
 	it('Should set and get the same message',function(){

@@ -4,7 +4,7 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'war'
 apply plugin: 'jetty'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.7
 version = '1.0'
 def SpringVersion = '4.0.0.RELEASE'
 

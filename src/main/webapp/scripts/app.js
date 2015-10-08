@@ -6,7 +6,7 @@ var app = angular.module('ICareUI',[
 
 app.config(['$routeProvider',function($routeProvider){
 	$routeProvider.
-		when('/',{
+		when('/login',{
 			templateUrl : 'views/Login.html',
 			controller : 'LoginController'
 		}).when('/home',{
@@ -30,6 +30,9 @@ app.config(['$routeProvider',function($routeProvider){
 		}).when('/appointment/queue',{
 			templateUrl : 'views/ViewAppointments.html',
 			controller : 'AppointmentController'
+		}).when('/logout',{
+			templateUrl : 'views/Login.html',
+			controller : 'LoginController'
 		});
 }]);
 

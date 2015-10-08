@@ -3,6 +3,7 @@ describe('ACCESS CONTROLLER TEST SUITE:',function(){
 	var $scope,loginService,$location,$httpBackend,$rootScope;
 	
 	beforeEach(module('ICareUI'));
+	
 	beforeEach(inject(function($injector,$controller,LoginService){
 		$scope = $injector.get('$rootScope');
 		$rootScope = {};
